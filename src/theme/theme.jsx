@@ -9,7 +9,7 @@ const color = {
     purple: "#BA94D1",
     pink: "#DEBACE",
     light: "#FBFACD",
-    blcak: "#333333"
+    black: "#333333"
 }
 
 export {poppins, aclonica, color}

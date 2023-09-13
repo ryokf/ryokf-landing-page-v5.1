@@ -11,10 +11,11 @@ const style = {
     }
 }
 
-const RouteTitle = ({title, isCurrent}) => {
+const RouteTitle = ({title, isCurrent, onClick}) => {
+    
     return(
         <div className="">
-            <button style={isCurrent ? style.current : style.notCurrent} className="text-lg rounded-lg font-bold">{title}</button>
+            <button onClick={() => onClick(title)} style={isCurrent ? style.current : style.notCurrent} className="text-lg rounded-lg font-bold">{title}</button>
         </div>
     )
 }
