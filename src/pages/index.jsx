@@ -55,9 +55,15 @@ export default function Home() {
 
   const routeList = ['home', 'about', 'skills', 'portfolio', 'gallery']
   const [currentRoute, setCurrentRoute] = useState(routeList[0])
+  const [isHidden, setIsHidden] = useState(false)
   const handleClick = (route) => {
     console.log(route)
+    console.log(currentRoute)
     setCurrentRoute(route)
+
+    setTimeout(() => {
+      setIsHidden(!isHidden)
+    }, 500)
   }
 
   return (
@@ -73,7 +79,7 @@ export default function Home() {
 
       </div>
 
-      <div className={`${currentRoute === 'home' ? 'opacity-100' : 'opacity-0 absolute w-screen'} transition-all duration-500`}>
+      <div className={`${currentRoute === 'home' ? 'opacity-100' : 'opacity-0 absolute w-screen'} ${isHidden ? 'hidden' : ''} transition-all duration-500`}>
 
         <Image style={style.starIcon1} width={100} height={100} src="/Star.svg" alt=''></Image>
         <Image style={style.starIcon2} width={100} height={100} src="/Star.svg" alt=''></Image>
@@ -88,7 +94,7 @@ export default function Home() {
 
       </div>
 
-      <div className={`${currentRoute === 'about' ? 'opacity-100' : 'opacity-0 absolute w-screen'} transition-all duration-500`}>
+      <div className={`${currentRoute === 'about' ? 'opacity-100' : 'opacity-0 absolute w-screen z-50'} transition-all duration-500`}>
         <div className='flex justify-center gap-10 w-10/12 flex-wrap m-auto my-20'>
           <div style={{
             width: '350px',
