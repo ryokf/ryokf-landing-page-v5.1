@@ -1,4 +1,4 @@
-import { poppins, aclonica, color } from "@/theme/theme"
+import { poppins, aclonica, color } from "@/lib/theme/theme"
 import { useState } from "react"
 
 const PortoCard = ({ style, title, category, photo, className, linkGithub, linkProject }) => {

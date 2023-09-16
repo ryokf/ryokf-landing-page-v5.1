@@ -1,4 +1,4 @@
-import { color } from "@/theme/theme"
+import { color } from "@/lib/theme/theme"
 
 const style = {
     current: {
