@@ -6,6 +6,7 @@ import IgCard from '@/components/fragments/IgCard'
 import LinkedinCard from '@/components/fragments/LinkedinCard'
 import PortoCard from '@/components/fragments/PortoCard'
 import RouteList from '@/components/fragments/RouteList'
+import useWindowDimensions from '@/helper/dimensioInfo'
 import { color, aclonica, poppins } from '@/theme/theme'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -23,14 +24,14 @@ const style = {
     fontweight: 'medium',
   }, starIcon1: {
     position: 'absolute',
-    right: '400px',
+    // right: '400px',
     width: '100px',
     color: 'white'
   },
   starIcon2: {
     position: 'absolute',
-    left: '350px',
-    top: '430px',
+    // left: '350px',
+    // top: '430px',
     width: '100px',
     color: 'white'
   },
@@ -58,7 +59,7 @@ export default function Home() {
   const [isHidden, setIsHidden] = useState(false)
 
   const handleClick = (route) => {
-    if(route == currentRoute) return;
+    if (route == currentRoute) return;
     setCurrentRoute(route)
 
     setTimeout(() => {
@@ -66,10 +67,33 @@ export default function Home() {
     }, 500)
   }
 
+  const [width, height] = useWindowDimensions();
+  console.log(width)
+
+  const star = () => {
+    return (
+      <>
+        <Image style={{
+          position: 'absolute',
+          right: width / 6,
+          width: '100px',
+          color: 'white'
+        }} width={100} height={100} src="/Star.svg" alt='' />
+
+
+        <Image style={{
+          position: 'absolute',
+          left: width / 6.3,
+          top: height / 2.5,
+          width: '100px',
+          color: 'white'
+        }} width={100} height={100} src="/Star.svg" alt='' />
+      </>
+    )
+  }
+
   return (
     <div style={{ backgroundImage: "url('/background.png')" }} className="absolute w-full min-h-screen bg-cover overflow-hidden">
-      {/* <RouteList onClick={() => handleClick(route)} routeList={routeList} currentRoute={route}></RouteList> */}
-
       <div className="flex gap-4 justify-center my-5">
         {
           routeList.map((route, index) => {
@@ -80,20 +104,36 @@ export default function Home() {
 
       <div className={`${currentRoute === 'home' ? 'opacity-100' : 'opacity-0 absolute w-screen'} ${isHidden ? 'hidden' : ''} transition-all duration-500`}>
 
-        <Image style={style.starIcon1} width={100} height={100} src="/Star.svg" alt=''></Image>
-        <Image style={style.starIcon2} width={100} height={100} src="/Star.svg" alt=''></Image>
+        {width > 1024 ? star() : ''}
 
-        <h1 style={style.nameTitle} className={`text-center mt-20 mb-10 ${aclonica.className}`}> {data.home.title}</h1>
-        <p style={style.description} className={`m-auto text-center  ${poppins.className}`}>{data.home.description}</p>
+        <h1 style={{
+          color: color.primary,
+          fontSize: (width > 1024) ? width / 20 : width / 12,
+        }} className={`text-center mt-10 md:mt-20 mb-5 md:mb-10 ${aclonica.className}`}> {data.home.title}</h1>
 
-        <div className="w-10/12 m-auto my-20 flex gap-10 justify-center">
-          <PortoCard linkGithub={"https://github.com/ryokf/clone-kompas-v2"} title={"Confess"} className={`w-1/3 min-h-fit`} category={'News Portal'}></PortoCard>
-          <PortoCard linkProject={"https://learn.dnccudinus.org/"} linkGithub={"https://github.com/dnccsemarang/devlearn-dncc"} title={"Devlearn"} className={`w-2/3`} category={'Learning platform'}></PortoCard>
+        <p style={{
+          color: color.primary,
+          fontSize: (width > 1024) ? width / 90 : width / 30,
+          width: (width > 1024) ? '650px' : width / 1.2,
+          fontweight: 'medium',
+        }} className={`m-auto text-center  ${poppins.className}`}>{data.home.description}</p>
+
+        <div className="w-10/12 m-auto my-10 md:my-20 grid grid-cols-1 md:grid-cols-5 gap-10 justify-center">
+          <PortoCard linkGithub={"https://github.com/ryokf/clone-kompas-v2"} title={"Confess"} className={`col-span-1 md:col-span-2 min-h-fit`} category={'News Portal'}></PortoCard>
+          <PortoCard linkProject={"https://learn.dnccudinus.org/"} linkGithub={"https://github.com/dnccsemarang/devlearn-dncc"} title={"Devlearn"} className={`col-span-1 md:col-span-3`} category={'Learning platform'}></PortoCard>
         </div>
 
       </div>
 
-      <div className={`${currentRoute === 'about' ? 'opacity-100' : 'opacity-0 absolute w-screen z-50'} transition-all duration-500`}>
+      <div className={`${currentRoute === 'skills' ? 'opacity-100' : 'opacity-0 absolute w-screen z-10'} transition-all duration-500`}>
+        <h1 style={{ color: color.primary }} className={`text-center mt-20 mb-8 text-5xl ${aclonica.className}`}>Skills</h1>
+        <p style={{ color: color.primary }} className={`text-center ${poppins.className}`}>Alat yang sering saya gunakan dalam membangun aplikasi</p>
+        <div className="grid grid-cols-2 w-10/12 m-auto gap-10 mt-10">
+          {/* <PortoCard className={`w-full `} title={"Confess"} category={'News Portal'}></PortoCard> */}
+        </div>
+      </div>
+
+      <div className={`${currentRoute === 'about' ? 'opacity-100' : 'opacity-0 absolute w-screen z-20'} transition-all duration-500`}>
         <div className='flex justify-center gap-10 w-10/12 flex-wrap m-auto my-20'>
           <div style={{
             width: '350px',
@@ -121,7 +161,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={`${currentRoute === 'portfolio' ? 'opacity-100' : 'opacity-0 absolute w-screen z-50'} transition-all duration-500`}>
+      <div className={`${currentRoute === 'portfolio' ? 'opacity-100' : 'opacity-0 absolute w-screen z-40'} transition-all duration-500`}>
         <h1 style={{ color: color.primary }} className={`text-center mt-20 mb-8 text-5xl ${aclonica.className}`}>Portfolio</h1>
         <p style={{ color: color.primary }} className={`text-center ${poppins.className}`}>Beberapa hasil dari project yang pernah saya kerjakan</p>
         <div className="grid grid-cols-2 w-10/12 m-auto gap-10 mt-10">
