@@ -56,9 +56,9 @@ export default function Home() {
   const routeList = ['home', 'about', 'skills', 'portfolio', 'gallery']
   const [currentRoute, setCurrentRoute] = useState(routeList[0])
   const [isHidden, setIsHidden] = useState(false)
+
   const handleClick = (route) => {
-    console.log(route)
-    console.log(currentRoute)
+    if(route == currentRoute) return;
     setCurrentRoute(route)
 
     setTimeout(() => {
@@ -76,7 +76,6 @@ export default function Home() {
             return <RouteTitle key={index} title={route} isCurrent={currentRoute == route} onClick={() => handleClick(route)} />
           })
         }
-
       </div>
 
       <div className={`${currentRoute === 'home' ? 'opacity-100' : 'opacity-0 absolute w-screen'} ${isHidden ? 'hidden' : ''} transition-all duration-500`}>
@@ -84,12 +83,12 @@ export default function Home() {
         <Image style={style.starIcon1} width={100} height={100} src="/Star.svg" alt=''></Image>
         <Image style={style.starIcon2} width={100} height={100} src="/Star.svg" alt=''></Image>
 
-        <h1 style={style.nameTitle} className={`text-center my-20 ${aclonica.className}`}> {data.home.title}</h1>
+        <h1 style={style.nameTitle} className={`text-center mt-20 mb-10 ${aclonica.className}`}> {data.home.title}</h1>
         <p style={style.description} className={`m-auto text-center  ${poppins.className}`}>{data.home.description}</p>
 
         <div className="w-10/12 m-auto my-20 flex gap-10 justify-center">
-          <PortoCard style={{ width: '500px', height: '300px' }} title={"Confess"} category={'News Portal'}></PortoCard>
-          <PortoCard style={{ width: '900px', height: '300px' }} title={"Devlearn"} category={'Learning platform'}></PortoCard>
+          <PortoCard linkGithub={"https://github.com/ryokf/clone-kompas-v2"} title={"Confess"} className={`w-1/3 min-h-fit`} category={'News Portal'}></PortoCard>
+          <PortoCard linkProject={"https://learn.dnccudinus.org/"} linkGithub={"https://github.com/dnccsemarang/devlearn-dncc"} title={"Devlearn"} className={`w-2/3`} category={'Learning platform'}></PortoCard>
         </div>
 
       </div>
@@ -99,7 +98,8 @@ export default function Home() {
           <div style={{
             width: '350px',
             height: '350px',
-          }} className="rounded-3xl bg-slate-100 ">
+            backgroundImage: 'url(/myself.JPG)'
+          }} className="rounded-3xl bg-cover">
             <Image></Image>
           </div>
           <div className="w-1/3 flex flex-col justify-around">
@@ -120,6 +120,15 @@ export default function Home() {
           <LinkedinCard></LinkedinCard>
         </div>
       </div>
+
+      <div className={`${currentRoute === 'portfolio' ? 'opacity-100' : 'opacity-0 absolute w-screen z-50'} transition-all duration-500`}>
+        <h1 style={{ color: color.primary }} className={`text-center mt-20 mb-8 text-5xl ${aclonica.className}`}>Portfolio</h1>
+        <p style={{ color: color.primary }} className={`text-center ${poppins.className}`}>Beberapa hasil dari project yang pernah saya kerjakan</p>
+        <div className="grid grid-cols-2 w-10/12 m-auto gap-10 mt-10">
+          <PortoCard className={`w-full `} title={"Confess"} category={'News Portal'}></PortoCard>
+        </div>
+      </div>
+
     </div>
   )
 }
