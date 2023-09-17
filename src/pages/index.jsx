@@ -54,7 +54,7 @@ const data = {
 
 export default function Home() {
 
-  const routeList = ['home', 'about', 'skills', 'portfolio', 'gallery']
+  const routeList = ['home', 'about', 'skills', 'portfolio']
   const [currentRoute, setCurrentRoute] = useState(routeList[0])
   const [isHidden, setIsHidden] = useState(false)
 
@@ -76,25 +76,23 @@ export default function Home() {
         <Image style={{
           position: 'absolute',
           right: width / 6,
-          width: '100px',
           color: 'white'
-        }} width={100} height={100} src="/Star.svg" alt='' />
+        }} width={width / 15} height={0} src="/Star.svg" alt='' />
 
 
         <Image style={{
           position: 'absolute',
           left: width / 6.3,
           top: height / 2.5,
-          width: '100px',
           color: 'white'
-        }} width={100} height={100} src="/Star.svg" alt='' />
+        }} width={width / 15} height={0} src="/Star.svg" alt='' />
       </>
     )
   }
 
   return (
-    <div style={{ backgroundImage: "url('/background.png')" }} className="absolute w-full min-h-screen bg-cover overflow-hidden">
-      <div className="flex gap-4 justify-center my-5">
+    <div style={{ backgroundImage: "url('/background.png')" }} className="absolute w-full min-h-screen bg-cover bg-center overflow-hidden">
+      <div className="flex m-auto md:gap-4 justify-center my-5">
         {
           routeList.map((route, index) => {
             return <RouteTitle key={index} title={route} isCurrent={currentRoute == route} onClick={() => handleClick(route)} />
@@ -119,8 +117,16 @@ export default function Home() {
         }} className={`m-auto text-center  ${poppins.className}`}>{data.home.description}</p>
 
         <div className="w-10/12 m-auto my-10 md:my-20 grid grid-cols-1 md:grid-cols-5 gap-10 justify-center">
-          <PortoCard linkGithub={"https://github.com/ryokf/clone-kompas-v2"} title={"Confess"} className={`col-span-1 md:col-span-2 min-h-fit`} category={'News Portal'}></PortoCard>
-          <PortoCard linkProject={"https://learn.dnccudinus.org/"} linkGithub={"https://github.com/dnccsemarang/devlearn-dncc"} title={"Devlearn"} className={`col-span-1 md:col-span-3`} category={'Learning platform'}></PortoCard>
+          <PortoCard titleStyle={{
+            color: color.primary,
+            fontSize: (width > 767) ? width / 40 : width / 16
+          }} linkGithub={"https://github.com/ryokf/clone-kompas-v2"} title={"Confess"} className={`col-span-1 md:col-span-2 min-h-fit`} category={'News Portal'}></PortoCard>
+          <PortoCard
+            titleStyle={{
+              color: color.primary,
+              fontSize: (width > 767) ? width / 40 : width / 16
+            }}
+            linkProject={"https://learn.dnccudinus.org/"} linkGithub={"https://github.com/dnccsemarang/devlearn-dncc"} title={"Devlearn"} className={`col-span-1 md:col-span-3`} category={'Learning platform'}></PortoCard>
         </div>
 
       </div>
@@ -134,28 +140,39 @@ export default function Home() {
       </div>
 
       <div className={`${currentRoute === 'about' ? 'opacity-100' : 'opacity-0 absolute w-screen z-20'} transition-all duration-500`}>
-        <div className='flex justify-center gap-10 w-10/12 flex-wrap m-auto my-20'>
+        <div className='flex flex-col md:flex-row items-center justify-center gap-10 w-10/12 flex-wrap m-auto my-10 lg:my-20'>
           <div style={{
-            width: '350px',
-            height: '350px',
+            width: width > 1024 ? width / 5.5 : width / 2.5,
+            height: width > 1024 ? width / 5.5 : width / 2.5,
             backgroundImage: 'url(/myself.JPG)'
           }} className="rounded-3xl bg-cover">
             <Image></Image>
           </div>
-          <div className="w-1/3 flex flex-col justify-around">
-            <div style={{ color: color.primary }} className={`text-4xl ${aclonica.className}`}>I’m a Informatics Engineering student
+          <div className="w-11/12 lg:w-1/3 flex flex-col justify-around gap-4">
+
+            <div style={{
+              color: color.primary,
+              fontSize: (width > 1024) ? width / 60 : width / 25
+            }} className={`${aclonica.className}`}>I’m a Informatics Engineering student
               from semarang, indonesia </div>
-            <div style={{ color: color.primary }} className={`${poppins.className}`}>
+
+            <div style={{
+              color: color.primary,
+              fontSize: (width > 1024) ? width / 110 : width / 40
+            }} className={`${poppins.className}`}>
               <span className='ml-5'></span>Hai, nama saya adalah Ryo Khrisna Fitriawan. ketertarikan saya pada website bermula pada tahun 2021 ketika saya memutuskan untuk mendaftar kuliah di jurusan teknik informatika. pada tahun 2021 saya lulus dari jenjang SMA dan memutuskan untuk gap year, pada waktu satu tahun itulah saya belajar otodidak mengenai website.
             </div>
+
           </div>
         </div>
         <div className="">
           <p style={{ color: color.primary }} className={`text-center text-2xl ${aclonica.className}`} >Let's be friend</p>
         </div>
         <hr className='w-10/12 m-auto my-5' />
-        <div className="w-10/12 m-auto flex gap-4">
-          <IgCard></IgCard>
+        <div className="w-10/12 m-auto grid grid-cols-1 lg:grid-cols-5 gap-4 my-5">
+          <IgCard iconStyle={{
+            width: width > 1022 ? width / 20 : width / 8,
+          }}></IgCard>
           <GithubCard></GithubCard>
           <LinkedinCard></LinkedinCard>
         </div>

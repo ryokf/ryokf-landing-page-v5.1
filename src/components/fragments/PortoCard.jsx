@@ -1,7 +1,7 @@
 import { poppins, aclonica, color } from "@/lib/theme/theme"
 import { useState } from "react"
 
-const PortoCard = ({ style, title, category, photo, className, linkGithub, linkProject }) => {
+const PortoCard = ({ style, title, category, photo, className, linkGithub, linkProject, titleStyle }) => {
     const [isPortoClicked, setIsPortoClicked] = useState(false)
 
     const handleClick = () => {
@@ -10,8 +10,8 @@ const PortoCard = ({ style, title, category, photo, className, linkGithub, linkP
 
     return (
         <div style={style} className={`rounded-3xl bg-white/50 backdrop-blur-md pt-5 pr-7 overflow-hidden ${className}`}>
-            <p className={`text-right text-lg text-zinc-500 ${poppins.className} mb-3`}>{category}</p>
-            <h1 style={{ color: color.primary }} className={`text-right text-5xl ${aclonica.className} mb-6`}>{title}</h1>
+            <p className={`text-right text-xs md:text-lg text-zinc-500 ${poppins.className} mb-3`}>{category}</p>
+            <h1 style={titleStyle} className={`text-right text-5xl ${aclonica.className} mb-6`}>{title}</h1>
             <button onClick={() => handleClick()} style={{ backgroundImage: 'url(https://source.unsplash.com/random)' }} className={`w-11/12 bg-cover aspect-video overflow-hidden rounded-tr-xl h-full`}>
                 <div className={`w-full h-full flex justify-center items-center gap-4 ${isPortoClicked ? 'bg-black/50' : 'bg-transparent'} transition-all`}>
                     <a href={linkGithub} className={`shadow w-14 h-14 rounded-full bg-white/50 transition-all flex justify-center items-center p-2 ${isPortoClicked ? 'opacity-100' : 'opacity-0'}`} target="_blank">
