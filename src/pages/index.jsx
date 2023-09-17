@@ -257,7 +257,7 @@ export default function Home() {
               <span className='ml-5'></span>Hai, nama saya Ryo Khrisna Fitriawan. Ketertarikan saya terhadap pembuatan website bermula pada tahun 2021 ketika saya memutuskan untuk mendaftar kuliah di jurusan Teknik Informatika. Pada tahun 2021, saya lulus dari SMA dan memutuskan untuk mengambil gap year, selama setahun tersebut saya belajar secara otodidak mengenai pembuatan website.
             </div>
 
-            <a href='' style={{
+            <a href='/cv.pdf' style={{
               backgroundColor: color.primary,
             }} className="p-2 rounded-lg text-white w-1/4 text-center">
               Download CV
